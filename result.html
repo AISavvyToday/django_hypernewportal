@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+{% for art in articles_to_show %}
+    {{ art.created }}
+        <li><a href="/news/{{ art.link }}/">{{ art.title }}</a></li>
+{% endfor %}
+</body>
+</html>

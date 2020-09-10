@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hyper news</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<body>
+{% if articles_to_show %}
+    {% for art in articles_to_show %}
+        {{ art.created }}<br>
+        <a href="/news/{{ art.link }}/">{{ art.title }}</a><br>
+    {% endfor %}
+
+{% elif grouped_by_day %}
+    <h2>Hyper news</h2>
+        <form action="news/" method="get">
+            <label for="search_news">Find article</label>
+            <input type="text" name="q" id="search_news" placeholder="enter keyword" required>
+            <input type="submit" value="Search">
+        </form>
+    {% for day_release, articles in grouped_by_day.items %}
+        <h4>{{ day_release }}</h4>
+    <ul>
+        {% for article in articles %}
+            <li><a href="/news/{{ article.link }}/">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+    <a href="/news/create/">Create new</a>
+{% endif %}
+</body>
+</html>
+
+
